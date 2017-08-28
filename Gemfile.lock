@@ -159,6 +159,9 @@ GEM
     gemoji (2.1.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
+    graphiql-rails (1.4.4)
+      rails
+    graphql (1.6.7)
     haml (5.0.2)
       temple (>= 0.8.0)
       tilt
@@ -440,6 +443,8 @@ DEPENDENCIES
   factory_girl_rails
   font_assets
   gemoji
+  graphiql-rails
+  graphql
   haml-rails
   honeybadger
   honeypot-captcha!
