@@ -410,9 +410,9 @@ AnnualSchedule.where(year: 2017).first_or_create!(
   'Marla Brizel'
 ].each do |name|
   scope = User.where(name: name)
-  raise "#{name} matches #{scope.count} users!" unless scope.count == 1
-  user = scope.first!
-  unless user.avatar?
+  raise "#{name} matches #{scope.count} users!" if scope.count > 1
+  user = scope.first
+  if user && !user.avatar?
     avatar_path = Rails.root.join('app', 'assets', 'images', 'redesign', "#{name.parameterize}.jpg")
     user.update_attributes(avatar: File.open(avatar_path))
   end
