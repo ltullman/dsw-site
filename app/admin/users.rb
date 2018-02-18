@@ -39,6 +39,7 @@ ActiveAdmin.register User do
 
   filter :name
   filter :email
+  filter :is_admin
 
   controller do
     def update
