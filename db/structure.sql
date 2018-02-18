@@ -793,7 +793,9 @@ CREATE TABLE users (
     last_sign_in_at timestamp without time zone,
     current_sign_in_ip character varying(255),
     last_sign_in_ip character varying(255),
-    provider character varying(255)
+    provider character varying(255),
+    team_position character varying,
+    avatar character varying
 );
 
 
@@ -1897,6 +1899,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171024210033'),
 ('20171029211526'),
 ('20171130230321'),
-('20171212024445');
+('20171212024445'),
+('20180218043834'),
+('20180218194540');
 
 

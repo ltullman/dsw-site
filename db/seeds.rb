@@ -392,3 +392,28 @@ AnnualSchedule.where(year: 2017).first_or_create!(
   ambassador_application_open_at: Date.parse('2017-07-01').freeze,
   ambassador_application_close_at: Date.parse('2017-08-11').freeze
 )
+
+[
+  'Tami Door',
+  'Erik Mitisek',
+  'Ben Deda',
+  'Castle Searcy',
+  'Brian Corrigan',
+  'Jay Zeschin',
+  'Conor Swanson',
+  'John Wilker',
+  'Chuck Sullivan',
+  'Lauren Kloock',
+  'Nate Greenlee',
+  'Leah Zions',
+  'Aaron Duke',
+  'Marla Brizel'
+].each do |name|
+  scope = User.where(name: name)
+  raise "#{name} matches #{scope.count} users!" unless scope.count == 1
+  user = scope.first!
+  unless user.avatar?
+    avatar_path = Rails.root.join('app','assets','images','redesign', "#{name.parameterize}.jpg")
+    user.update_attributes(avatar: File.open(avatar_path))
+  end
+end

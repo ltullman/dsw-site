@@ -18,6 +18,12 @@ class User < ApplicationRecord
   has_many :registrations, dependent: :destroy
   has_many :pitch_contest_votes, class_name: 'PitchContest::Vote', dependent: :destroy
 
+  mount_uploader :avatar, AvatarUploader
+
+  def self.on_team
+    where.not(team_position: nil)
+  end
+
   def current_registration
     registrations.for_current_year.first
   end

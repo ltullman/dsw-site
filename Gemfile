@@ -24,8 +24,10 @@ gem 'honeypot-captcha', github: 'RandieM/honeypot-captcha', branch: 'master'
 gem 'emma', github: 'myemma/EmmaRuby'
 
 gem 'devise'
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave'
+gem 'mini_magick'
 gem 'fog-aws'
+gem 'gravatarify'
 
 gem 'html-pipeline', require: 'html/pipeline'
 gem 'commonmarker'
