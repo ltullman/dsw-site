@@ -394,26 +394,28 @@ AnnualSchedule.where(year: 2017).first_or_create!(
 )
 
 [
-  'Tami Door',
-  'Erik Mitisek',
-  'Ben Deda',
-  'Castle Searcy',
-  'Brian Corrigan',
-  'Jay Zeschin',
-  'Conor Swanson',
-  'John Wilker',
-  'Chuck Sullivan',
-  'Lauren Kloock',
-  'Nate Greenlee',
-  'Leah Zions',
-  'Aaron Duke',
-  'Marla Brizel'
-].each do |name|
-  scope = User.where(name: name)
-  raise "#{name} matches #{scope.count} users!" if scope.count > 1
-  user = scope.first
-  if user && !user.avatar?
-    avatar_path = Rails.root.join('app', 'assets', 'images', 'redesign', "#{name.parameterize}.jpg")
-    user.update_attributes(avatar: File.open(avatar_path))
+  { name: 'Tami Door', team_position: 'Organizing Chair', description: 'Downtown Denver Partnership', team_priority: 0 },
+  { name: 'Erik Mitisek', team_position: 'Organizing Chair', description: 'IMAgine Analytics', team_priority: 0 },
+  { name: 'Ben Deda', team_position: 'Organizing Chair', description: 'Vertafore', team_priority: 0 },
+  { name: 'Castle Searcy', team_position: 'Designer Track Chair', description: 'Tootsies Nail Shoppe', team_priority: 1 },
+  { name: 'Brian Corrigan', team_position: 'Designer Track Assistant Chair', description: 'Oh Heck Yeah', team_priority: 1 },
+  { name: 'Conor Swanson', team_position: 'Developer Track Chair', description: 'Code Talent', team_priority: 1 },
+  { name: 'John Wilker', team_position: 'Headline Events Chair', description: '360|Conferences', team_priority: 1 },
+  { name: 'Chuck Sullivan', team_position: 'Maker Track Co-Chair', description: 'Something Independent', team_priority: 1 },
+  { name: 'Lauren Kloock', team_position: 'Maker Track Co-Chair', description: 'Colorado Lending Source', team_priority: 1 },
+  { name: 'Nate Greenlee', team_position: 'Founder & Growth Tracks Co-Chair', description: 'Team & Culture', team_priority: 1 },
+  { name: 'Leah Zions', team_position: 'Founder & Growth Tracks, Editor', description: 'Team & Culture', team_priority: 1 },
+  { name: 'Aaron Duke', team_position: 'Product Track Chair', description: 'CirrusMD', team_priority: 1 },
+  { name: 'Marla Brizel', team_position: 'Community & Inclusion Chair', description: 'Test Double', team_priority: 1 },
+  { name: 'Jay Zeschin', team_position: 'Technology, Strategy & Operations', team_priority: 2 },
+  { name: 'Rye Finegan', team_position: 'Manager, Denver Startup Week', description: 'Downtown Denver Partnership', team_priority: 2 },
+  { name: 'Kate Barton', team_position: 'VP, Executive Office & Special Projects', description: 'Downtown Denver Partnership', team_priority: 2 },
+].each do |attrs|
+  User.where(name: attrs[:name]).each do |user|
+    # raise "#{attrs[:name]} matches #{scope.count} users!" if scope.count > 1
+    if user && !user.avatar?
+      avatar_path = Rails.root.join('app', 'assets', 'images', 'redesign', "#{user.name.parameterize}.jpg")
+      user.update_attributes(attrs.merge(avatar: File.open(avatar_path)))
+    end
   end
 end
