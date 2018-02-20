@@ -8,9 +8,10 @@ feature 'Creating a submission' do
   end
 
   describe 'when submissions are open' do
+    let!(:company) { create(:company, name: 'Example.com') }
+
     before do
       travel_to AnnualSchedule.current.cfp_open_at.to_datetime + 1.day
-      create(:company, name: 'Example.com')
     end
 
     scenario 'User submits a new idea' do

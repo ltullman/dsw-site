@@ -74,8 +74,8 @@ class Submission < ApplicationRecord
   validates :location, length: { maximum: 255 }
 
   after_create :notify_track_chairs_of_new_submission!
-  after_create :send_confirmation_notice
-  after_save :subscribe_to_list
+  after_create :send_confirmation_notice!
+  after_save :subscribe_to_list!
 
   after_initialize do
     self.year ||= Date.today.year
@@ -351,11 +351,11 @@ class Submission < ApplicationRecord
     end
   end
 
-  def send_confirmation_notice
+  def send_confirmation_notice!
     NotificationsMailer.confirm_new_submission(self).deliver_now
   end
 
-  def subscribe_to_list
+  def subscribe_to_list!
     [ contact_emails, submitter.try(:email) ].flatten.compact.uniq.each do |email|
       submitted_years = Submission.
                         joins(:submitter).
