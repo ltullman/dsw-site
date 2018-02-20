@@ -16,8 +16,10 @@ feature 'Editing my profile' do
     click_button 'Sign Up'
     click_link 'My Profile'
     fill_in 'Name', with: 'Test Registrant 2'
+    fill_in 'Tagline', with: 'Founder at Pied Piper'
     fill_in 'user_current_password', with: 'password'
     click_button 'Update'
-    expect(page).to have_text('Test Registrant 2')
+    expect(page).to have_field('Name', with: 'Test Registrant 2')
+    expect(page).to have_field('Tagline', with: 'Founder at Pied Piper')
   end
 end
