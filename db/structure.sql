@@ -795,7 +795,8 @@ CREATE TABLE users (
     last_sign_in_ip character varying(255),
     provider character varying(255),
     team_position character varying,
-    avatar character varying
+    avatar character varying,
+    team_priority integer
 );
 
 
@@ -1901,6 +1902,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171130230321'),
 ('20171212024445'),
 ('20180218043834'),
-('20180218194540');
+('20180218194540'),
+('20180220163023');
 
 

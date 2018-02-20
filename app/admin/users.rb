@@ -8,7 +8,8 @@ ActiveAdmin.register User do
                 :description,
                 :is_admin,
                 :avatar,
-                :team_position
+                :team_position,
+                :team_priority
 
   index do
     selectable_column
@@ -29,6 +30,7 @@ ActiveAdmin.register User do
       f.input :description
       f.input :email
       f.input :team_position
+      f.input :team_priority, as: :number, min: 0, max: 10, hint: 'Lower values show first'
       f.input :password
       f.input :password_confirmation
       f.input :is_admin
