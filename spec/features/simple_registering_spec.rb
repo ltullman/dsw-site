@@ -34,6 +34,10 @@ feature 'Registering to attend (via kiosk)' do
     click_button 'Register'
     expect(page).to have_content('Thanks for registering')
     expect(current_path).to include('/schedule')
+    user = User.where(email: 'test2@example.com').first!
+    expect(user.name).to eq('Test Registrant')
+    expect(user.current_registration.company.name).to eq('Example.com')
+    expect(user.current_registration.primary_role).to eq('Developer')
   end
 
   scenario 'Registering to attend with a preexisting account' do
@@ -56,5 +60,7 @@ feature 'Registering to attend (via kiosk)' do
     expect(page).to have_content('Thanks for registering')
     expect(current_path).to include('/schedule')
     expect(user.reload.name).to eq('Preexisting Registrant')
+    expect(user.current_registration.company.name).to eq('Example.com')
+    expect(user.current_registration.primary_role).to eq('Developer')
   end
 end

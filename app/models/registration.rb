@@ -20,6 +20,8 @@ class Registration < ApplicationRecord
             :age_range,
             :primary_role, presence: true
 
+  validates :user_id, uniqueness: { scope: :year, message: 'may only register once per year' }
+
   after_initialize do
     self.year ||= Date.today.year
     self.calendar_token ||= SecureRandom.hex(25)

@@ -11,6 +11,7 @@ RSpec.describe Registration, type: :model do
   it { is_expected.to validate_presence_of(:user) }
   it { is_expected.to validate_presence_of(:age_range) }
   it { is_expected.to validate_presence_of(:primary_role) }
+  it { is_expected.to validate_uniqueness_of(:user_id).scoped_to(:year) }
 
   it 'defaults its year to the current year' do
     expect(Registration.new.year).to eq(Date.today.year)

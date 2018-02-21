@@ -15,7 +15,7 @@ class RegistrationsController < ApplicationController
     if simple_registration?
       password = SecureRandom.hex
       @registration = Registration.new(registration_params)
-      @registration.user = User.first_or_initialize(email: registration_user_params[:email]) do |u|
+      @registration.user = User.where(email: registration_user_params[:email]).first_or_initialize do |u|
         u.assign_attributes(password: password,
                             password_confirmation: password,
                             name: registration_user_params[:name])
